@@ -7,15 +7,20 @@ function Provider({ children }) {
   const [books, setBooks] = useState([]);
 
   const fetchBooks = useCallback(async () => {
-    const response = await axios.get("http://localhost:3001/books");
+    const response = await axios.get(
+      "https://malavivikas.github.io/books/db.json/books"
+    );
 
     setBooks(response.data);
   }, []);
 
   const editBookById = async (id, newTitle) => {
-    const response = await axios.put(`http://localhost:3001/books/${id}`, {
-      title: newTitle,
-    });
+    const response = await axios.put(
+      `https://malavivikas.github.io/books/db.json/books/${id}`,
+      {
+        title: newTitle,
+      }
+    );
     // console.log(response);
     const updatedBooks = books.map((book) => {
       if (book.id === id) {
@@ -29,7 +34,9 @@ function Provider({ children }) {
   };
 
   const deleteBookById = async (id) => {
-    await axios.delete(`http://localhost:3001/books/${id}`);
+    await axios.delete(
+      `https://malavivikas.github.io/books/db.json/books/${id}`
+    );
 
     const updatedBooks = books.filter((book) => {
       return book.id !== id;
@@ -39,9 +46,12 @@ function Provider({ children }) {
   };
 
   const createBook = async (title) => {
-    const response = await axios.post("http://localhost:3001/books", {
-      title,
-    });
+    const response = await axios.post(
+      "https://malavivikas.github.io/books/db.json/books",
+      {
+        title,
+      }
+    );
 
     const updatedBooks = [...books, response.data];
     setBooks(updatedBooks);
